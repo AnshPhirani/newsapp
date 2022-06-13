@@ -1,6 +1,6 @@
 import "./App.css";
 
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import News from "./components/News";
 
@@ -8,21 +8,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import LoadingBar from "react-top-loading-bar";
 
-export default class App extends Component {
-  // apiKey = process.env.REACT_APP_NEWS_API;
-  apiKey = "887e944d56824055b14f6b491ec54722";
+export default function App() {
+  const apiKey = process.env.REACT_APP_NEWS_API;
 
-  state = {
-    progress: 0,
-  };
+  const [progress, setProgress] = useState(0);
 
-  setProgress = (progress) => {
-    this.setState({
-      progress: progress,
-    });
-  }
-
-  render() {
     return (
       <div>
         <Router>
@@ -30,18 +20,18 @@ export default class App extends Component {
           <LoadingBar
             height={3}
             color="#f11946"
-            progress={this.state.progress}
-            onLoaderFinished={() => this.setProgress(0)}
+            progress={progress}
+            onLoaderFinished={() => setProgress(0)}
           />
           <Routes>
-            {/* passed unique keys so that component gets re-rendered */}
+            {/* passed unique keys so that component gets re-rendered properly*/}
             <Route
               exact
               path="/"
               element={
                 <News
-                  setProgress={this.setProgress}
-                  apiKey={this.apiKey}
+                  setProgress={setProgress}
+                  apiKey={apiKey}
                   key="general"
                   country="in"
                   category="general"
@@ -54,8 +44,8 @@ export default class App extends Component {
               path="/business"
               element={
                 <News
-                  setProgress={this.setProgress}
-                  apiKey={this.apiKey}
+                  setProgress={setProgress}
+                  apiKey={apiKey}
                   key="business"
                   country="in"
                   category="business"
@@ -68,8 +58,8 @@ export default class App extends Component {
               path="/entertainment"
               element={
                 <News
-                  setProgress={this.setProgress}
-                  apiKey={this.apiKey}
+                  setProgress={setProgress}
+                  apiKey={apiKey}
                   key="entertainment"
                   country="in"
                   category="entertainment"
@@ -82,8 +72,8 @@ export default class App extends Component {
               path="/health"
               element={
                 <News
-                  setProgress={this.setProgress}
-                  apiKey={this.apiKey}
+                  setProgress={setProgress}
+                  apiKey={apiKey}
                   key="health"
                   country="in"
                   category="health"
@@ -96,8 +86,8 @@ export default class App extends Component {
               path="/science"
               element={
                 <News
-                  setProgress={this.setProgress}
-                  apiKey={this.apiKey}
+                  setProgress={setProgress}
+                  apiKey={apiKey}
                   key="science"
                   country="in"
                   category="science"
@@ -110,8 +100,8 @@ export default class App extends Component {
               path="/sports"
               element={
                 <News
-                  setProgress={this.setProgress}
-                  apiKey={this.apiKey}
+                  setProgress={setProgress}
+                  apiKey={apiKey}
                   key="sports"
                   country="in"
                   category="sports"
@@ -124,8 +114,8 @@ export default class App extends Component {
               path="/technology"
               element={
                 <News
-                  setProgress={this.setProgress}
-                  apiKey={this.apiKey}
+                  setProgress={setProgress}
+                  apiKey={apiKey}
                   key="technology"
                   country="in"
                   category="technology"
@@ -137,5 +127,4 @@ export default class App extends Component {
         </Router>
       </div>
     );
-  }
 }
